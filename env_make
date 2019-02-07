@@ -1,0 +1,6 @@
+TARGET = arm32v7
+OCTOPRINT-VERSION = 1.3.10
+PORTS = -p 80:80
+VOLUMES = -v /mnt/data:/data 
+MOUNTS = --mount source=docker-octoprint-volume,target=/data
+DEVICES = --device=/dev/video0 --device=/dev/serial/by-id/usb-FTDI_FT232R_USB_UART_A107POSS-if00-port0:/dev/ttyUSB
