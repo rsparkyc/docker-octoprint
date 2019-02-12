@@ -34,16 +34,17 @@ container:
 install: pull container start
 
 backup: 
-	docker run --rm --volumes-from $(NAME)-$(INSTANCE) --name tmp-backup -v ${CURDIR}:/backup $(TARGET)/python:2.7-slim-stretch tar cvf /backup/backup.tar /data
+	docker run --rm --volumes-from $(NAME)-$(INSTANCE) --name tmp-backup -v ${CURDIR}:/backup $(TARGET)/python:2.7-slim-stretch tar cvf /backup/backup.tar --exclude=/data/uploads /data
 	docker run -d -v ${CURDIR}:/backup --name $(NAME)-volume-backup $(TARGET)/python:2.7-slim-stretch /bin/sh -c "cd / && tar xvf /backup/backup.tar"
-	docker commit $(NAME)-volume-backup $(NS)/$(REPO)-volume-backup:$(VERSION)
+	docker commit $(NAME)-volume-backup $(NS)/$(REPO)-volume-backup:$(VERSION)-$(TIMESTAMP)
+	docker commit $(NAME)-volume-backup $(NS)/$(REPO)-volume-backup:latest
 	docker push $(NS)/$(REPO)-volume-backup:$(VERSION)-$(TIMESTAMP)
 	docker push $(NS)/$(REPO)-volume-backup:latest
 	docker rm $(NAME)-volume-backup 
-	rm backup.tar
+	rm -f backup.tar
 
 restore: pull
-	docker pull $(NS)/$(REPO)-volume-backup:latest
+	mocker pull $(NS)/$(REPO)-volume-backup:latest
 	docker run -i -t --name $(REPO)-backup $(NS)/$(REPO)-volume-backup:$(VERSION) /bin/sh
 	docker run -d ---volumes-from $(REPO)-backup -name $(NAME)-$(INSTANCE) $(PORTS) $(DEVICES) $(NS)/$(REPO):$(VERSION)
 
