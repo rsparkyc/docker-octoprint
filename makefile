@@ -18,10 +18,10 @@ pull:
 	docker pull $(NS)/$(REPO):$(VERSION)
 	
 shell:
-	docker run --rm --name $(NAME)-$(INSTANCE) -i -t $(PORTS) $(MOUNTS) $(DEVICES) $(NS)/$(REPO):$(VERSION) /bin/bash
+	docker run --rm --name $(NAME)-$(INSTANCE) -i -t $(PORTS) $(VOLUMES) $(DEVICES) $(NS)/$(REPO):$(VERSION) /bin/bash
 				
 start:
-	docker run -d --name $(NAME)-$(INSTANCE) $(PORTS) $(MOUNTS) $(DEVICES) $(NS)/$(REPO):$(VERSION)
+	docker run -d --name $(NAME)-$(INSTANCE) $(PORTS) $(VOLUMES) $(DEVICES) $(NS)/$(REPO):$(VERSION)
 						
 stop:
 	docker stop $(NAME)-$(INSTANCE)
@@ -40,7 +40,7 @@ backup:
 restore: stop 
 	docker volume rm -f $(NAME)-volume
 	docker volume create $(NAME)-volume
-	docker run -d -v ${CURDIR}:/backup --name $(NAME) busybox /bin/sh -c "cd / && tar xvf $(HOST_BACKUP_DIR)/$(NAME)-backup-latest.tar" 
+	docker run -d $(VOLUMES) -v $(HOME)/backup:/backup busybox /bin/sh -c "cd / && tar xvf /backup/$(NAME)-backup-latest.tar" 
 
 	start
 
