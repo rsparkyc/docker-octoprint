@@ -21,7 +21,7 @@ shell:
 	docker run --rm --name $(NAME)-$(INSTANCE) -i -t $(PORTS) $(VOLUMES) $(DEVICES) $(NS)/$(REPO):$(VERSION) /bin/bash
 				
 start:
-	docker run -d --name $(NAME)-$(INSTANCE) $(PORTS) $(VOLUMES) $(DEVICES) $(NS)/$(REPO):$(VERSION)
+	docker run -d --name $(NAME)-$(INSTANCE) $(PORTS) $(VOLUMES) $(DEVICES) $(RUN_FLAG) $(NS)/$(REPO):$(VERSION)
 						
 stop:
 	docker stop $(NAME)-$(INSTANCE)

@@ -5,3 +5,4 @@ PORTS = -p 80:80
 HOST_BACKUP_DIR = $(HOME)/backup
 VOLUMES = -v docker-octoprint-volume:/data
 DEVICES = --device=/dev/video0 --device=/dev/serial/by-id/usb-FTDI_FT232R_USB_UART_A107POSS-if00-port0:/dev/ttyUSB
+RUN_FLAG=--restart unless-stopped 
