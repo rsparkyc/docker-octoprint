@@ -18,7 +18,7 @@ pull:
 	docker volume create my-vol
 			
 shell:
-	docker run --rm --name $(NAME)-$(INSTANCE) -i -t $(PORTS) $(MOUNTS) $(DEVNCES) $(NS)/$(REPO):$(VERSION) /bin/bash
+	docker run --rm --name $(NAME)-$(INSTANCE) -i -t $(PORTS) $(MOUNTS) $(DEVICES) $(NS)/$(REPO):$(VERSION) /bin/bash
 				
 run:
 	docker run --rm --name $(NAME)-$(INSTANCE) $(PORTS) $(MOUNTS) $(DEVICES) $(NS)/$(REPO):$(VERSION)
