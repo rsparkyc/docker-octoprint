@@ -26,6 +26,7 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
   supervisor \
   unzip \
   wget \
+  ffmpeg \
   zlib1g-dev
 
 # Download packages
