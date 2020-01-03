@@ -1,5 +1,5 @@
 TARGET = arm32v7
-OCTOPRINT-VERSION = 1.3.11
+OCTOPRINT-VERSION = 1.3.12
 PORTS = -p 80:80
 VOLUMES = -v /mnt/data:/data 
 MOUNTS = --mount source=docker-octoprint-volume,target=/data
