@@ -39,8 +39,8 @@ container:
 	docker volume create $(NAME)-volume
 
 backup: 
-	docker run --rm --volumes-from $(NAME)-$(INSTANCE) --name tmp-backup -v ${CURDIR}:/backup $(TARGET)/python:2.7-slim-stretch tar cvf /backup/backup.tar /data
-	docker run -d -v ${CURDIR}:/backup --name $(NAME)-volume-backup $(TARGET)/python:2.7-slim-stretch /bin/sh -c "cd / && tar xvf /backup/backup.tar"
+	docker run --rm --volumes-from $(NAME)-$(INSTANCE) --name tmp-backup -v ${CURDIR}:/backup $(TARGET)/python:2.7-slim-buster tar cvf /backup/backup.tar /data
+	docker run -d -v ${CURDIR}:/backup --name $(NAME)-volume-backup $(TARGET)/python:2.7-slim-buster /bin/sh -c "cd / && tar xvf /backup/backup.tar"
 	docker commit $(NAME)-volume-backup $(NS)/$(REPO)-volume-backup:$(VERSION)
 	docker push $(NS)/$(REPO)-volume-backup:$(VERSION)
 	docker rm $(NAME)-volume-backup 

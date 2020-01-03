@@ -5,7 +5,7 @@
 This is a Dockerfile to set up [OctoPrint](http://octoprint.org/). It is a fork of [nunofgs/docker-octoprint](https://github.com/nunofgs/docker-octoprint) intended specifically for building and managing the container on a Raspberry pi 3b+. 
 
 Added to the base project is the following:
-- Updated base image to stretch to fix an issue with supervisor version (> v3.0)
+- Updated base image to stretch (and now buster) to fix an issue with supervisor version (> v3.0)
 - Added makefile system for building and managing the image. Please update the makefile to use your docker repo settings.
 - Use of a data volume instead of directory mount so that all container configuration files are encapsulated
 - Makefile command to back up the configuration in a container and push to Dockerhub (again, update your repo name in the Makefile if you're going to take advantage of this) 
