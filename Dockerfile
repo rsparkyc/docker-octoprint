@@ -16,7 +16,6 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
   git \
   haproxy \
   imagemagick \
-  libav-tools \
   v4l-utils \
   libjpeg-dev \
   libjpeg62-turbo \
